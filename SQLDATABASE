@@ -1,0 +1,46 @@
+-- Create tables
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(100),
+    price DECIMAL(8, 2),
+    quantity INT
+);
+
+CREATE TABLE Customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    address VARCHAR(255)
+);
+
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    book_id INT,
+    quantity INT,
+    order_date DATE,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (book_id) REFERENCES Books(book_id)
+);
+
+-- Add a book to the database
+INSERT INTO Books (book_id, title, author, price, quantity)
+VALUES (1, 'Book Title 1', 'Author 1', 19.99, 10);
+
+-- Add a customer to the database
+INSERT INTO Customers (customer_id, name, email, address)
+VALUES (1, 'John Doe', 'johndoe@example.com', '123 Main St');
+
+-- Place an order for a book
+INSERT INTO Orders (order_id, customer_id, book_id, quantity, order_date)
+VALUES (1, 1, 1, 2, '2023-05-30');
+
+-- View all available books
+SELECT * FROM Books;
+
+-- View all customers
+SELECT * FROM Customers;
+
+-- View all orders
+SELECT * FROM Orders;
